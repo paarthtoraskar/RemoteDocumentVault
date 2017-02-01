@@ -1,0 +1,35 @@
+﻿<Window x:Class="RDV.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="RDV" Height="600" Width="800">
+
+    <Grid>
+        <TabControl Name="tabControlMainFeatures">
+            <TabItem Name="tabitemCategories" Header="Categories">
+                <Frame Name="frameCategories">
+
+                </Frame>
+            </TabItem>
+            <TabItem Name="tabitemTextFinder" Header="Text Finder">
+                <Frame Name="frameTextFinder">
+
+                </Frame>
+            </TabItem>
+            <TabItem Name="tabitemMetadataRetriever" Header="Metadata Retriever">
+                <Frame Name="frameMetadataRetriever">
+
+                </Frame>
+            </TabItem>
+            <TabItem Name="tabitemDocumentInserter" Header="Document Inserter">
+                <Frame Name="frameDocumentInserter">
+
+                </Frame>
+            </TabItem>
+            <TabItem Name="tabitemContentAndMetadata" Header="Content and Metadata">
+                <Frame Name="frameContentAndMetadata">
+
+                </Frame>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

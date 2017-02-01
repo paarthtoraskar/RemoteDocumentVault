@@ -1,0 +1,55 @@
+﻿<Page x:Class="RDV.DocumentInserter"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="DocumentInserter">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0">Select file to insert into vault -</TextBlock>
+            <TextBox Name="textBoxSelectedFile" Grid.Row="1" HorizontalAlignment="Stretch" IsReadOnly="True"></TextBox>
+            <Button Name="buttonBrowse" Grid.Row="2" HorizontalAlignment="Left" Margin="0,10,0,10" Click="buttonBrowse_Click">Browse</Button>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0">Enter metadata properties -</TextBlock>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Name="labelDesc" Grid.Row="0" Margin="0,10,0,0">Enter description for this file (mandatory) -</TextBlock>
+                <TextBox Name="textBoxDesc" Grid.Row="1"></TextBox>
+                <TextBlock Name="labelDep" Grid.Row="2" Margin="0,10,0,0">Enter dependencies for this file, each separated by a semi-colon (optional) -</TextBlock>
+                <TextBox Name="textBoxDep" Grid.Row="3"></TextBox>
+                <TextBlock Name="labelKeywords" Grid.Row="4" Margin="0,10,0,0">Enter keywords for this file, each separated by a semi-colon (optional) -</TextBlock>
+                <TextBox Name="textBoxKeywords" Grid.Row="5"></TextBox>
+                <TextBlock Name="labelCategories" Grid.Row="6" Margin="0,10,0,0">Enter categories for this file, each separated by a semi-colon (mandatory) -</TextBlock>
+                <TextBox Name="textBoxCategories" Grid.Row="7"></TextBox>
+            </Grid>
+            <Button Name="buttonInsert" Grid.Row="2" HorizontalAlignment="Left" Margin="0,10,0,10" Click="buttonInsert_Click">Insert</Button>
+        </Grid>
+    </Grid>
+</Page>

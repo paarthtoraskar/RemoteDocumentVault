@@ -1,0 +1,106 @@
+﻿<Page x:Class="RDV.MetadataRetriever"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="MetadataRetriever" Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolVisiCon" />
+    </Page.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Name="labelMetadataProps" Grid.Row="0" Grid.Column="0">Select metadata properties -</TextBlock>
+            <StackPanel Grid.Row="1" Grid.Column="0">
+                <CheckBox Name="checkBoxName" Tag="Name">Name</CheckBox>
+                <CheckBox Name="checkBoxLastMod" Tag="LastModified">Last Modified</CheckBox>
+                <CheckBox Name="checkBoxVersion" Tag="Version">Version</CheckBox>
+                <CheckBox Name="checkBoxDesc" Tag="Description">Description</CheckBox>
+                <CheckBox Name="checkBoxDep" Tag="Dependencies">Dependencies</CheckBox>
+                <CheckBox Name="checkBoxKeywords" Tag="Keywords">Keywords</CheckBox>
+            </StackPanel>
+            <TextBlock Name="labelCategories" Grid.Row="0" Grid.Column="1">Select one or more categories -</TextBlock>
+            <ListBox Name="listBoxCategories" Grid.Row="1" Grid.Column="1" SelectionMode="Extended"></ListBox>
+        </Grid>
+        <Button Name="buttonRetrieve" Grid.Row="1" HorizontalAlignment="Left" Margin="0,10,0,10" Click="buttonRetrieve_Click">Retrieve</Button>
+        <ListBox Name="listBoxProps" Grid.Row="2" ItemsSource="{Binding RetrievedMetadataList}"
+                 Visibility="Visible" SelectionChanged="listBoxProps_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="{Binding Key}" Visibility="Hidden"></TextBlock>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
+                            <TextBlock Text="Name - " FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{Binding Value.Name}" Visibility="{Binding checkBoxName.IsChecked, Converter={StaticResource BoolVisiCon}}"
+                                       Margin="20,0,0,0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="Last Modified - " Margin="20,0,0,0" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{Binding Value.LastModified}" Visibility="{Binding checkBoxLastMod.IsChecked, Converter={StaticResource BoolVisiCon}}"
+                                       Margin="20,0,0,0" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="Version - " Margin="20,0,0,0" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{Binding Value.Version}" Visibility="{Binding checkBoxVersion.IsChecked, Converter={StaticResource BoolVisiCon}}"
+                                       Margin="20,0,0,0" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                        <Grid Grid.Row="2" Margin="5,0,5,5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Description - " Grid.Row="0" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{Binding Value.Description}" Visibility="{Binding checkBoxDesc.IsChecked, Converter={StaticResource BoolVisiCon}}" 
+                                       Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="Dependencies - " Grid.Row="1" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                            <ListBox ItemsSource="{Binding Value.Dependencies}" Visibility="{Binding checkBoxDep.IsChecked, Converter={StaticResource BoolVisiCon}}"
+                                     Grid.Row="1" Grid.Column="1">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <!--<WrapPanel IsItemsHost="True" />-->
+                                        <StackPanel Orientation="Horizontal" IsItemsHost="True"></StackPanel>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                            <TextBlock Text="Keywords - " Grid.Row="2" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                            <ListBox ItemsSource="{Binding Value.Keywords}" Visibility="{Binding checkBoxKeywords.IsChecked, Converter={StaticResource BoolVisiCon}}"
+                                     Grid.Row="2" Grid.Column="1">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <!--<WrapPanel IsItemsHost="True" />-->
+                                        <StackPanel Orientation="Horizontal" IsItemsHost="True"></StackPanel>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ScrollViewer Grid.Row="2" Visibility="Hidden">
+            <TextBlock Name="textBlockRetrievedMetadata" Padding="10"></TextBlock>
+        </ScrollViewer>
+    </Grid>
+</Page>

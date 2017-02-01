@@ -1,0 +1,5 @@
+CTA "C:\Users\Paarth Toraskar\Documents\visual studio 2012\Projects\CTA\CTA" *.cs /R /A /T TextFinderString1 /T TextFinderString2
+
+CTA "C:\Users\Paarth Toraskar\Documents\visual studio 2012\Projects\CTA\CTA" *.cs /R /M name lastModified version description dependencies keywords
+
+MetadataCreator "C:\Users\Paarth Toraskar\Documents\visual studio 2012\Projects\CTA\CTA\Navigate.cs" /T testing /D dep1 dep2 /K kw1 kw2 kw3
